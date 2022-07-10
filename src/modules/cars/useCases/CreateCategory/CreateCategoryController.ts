@@ -9,6 +9,9 @@ class CreateCategoryController {
 
   handle (request: Request, response: Response) {
     const { name, description } = request.body
+    if (!name || !description) {
+      throw new Error('Missing category name or description!')
+    }
 
     this.createCategoryUseCase.execute({ name, description })
     return response.status(201).send()
