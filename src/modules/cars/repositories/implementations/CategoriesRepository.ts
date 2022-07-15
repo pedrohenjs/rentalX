@@ -1,4 +1,6 @@
-import { Category } from '../../models/category'
+
+import { Categories, PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
 
 interface ICreateCategoryDTO {
     name: string
@@ -7,38 +9,28 @@ interface ICreateCategoryDTO {
 
 class CategoriesRepository {
   // eslint-disable-next-line no-use-before-define
-  private static INSTANCE: CategoriesRepository
-  private categories: Category[]
 
-  static getInstance () {
-    if (!CategoriesRepository.INSTANCE) {
-      CategoriesRepository.INSTANCE = new CategoriesRepository()
-    }
-    return CategoriesRepository.INSTANCE
-  }
-
-  constructor () {
-    this.categories = []
-  }
-
-  create ({ name, description }: ICreateCategoryDTO) {
-    const category: Category = new Category()
-    Object.assign(category, {
-      name,
-      description,
-      created_at: new Date()
+  async create ({ name, description }: ICreateCategoryDTO) {
+    await prisma.categories.create({
+      data: {
+        name,
+        description
+      }
     })
-
-    this.categories.push(category)
   }
 
-  findByName (name: string): Category | undefined {
-    const categoryByName = this.categories.find(category => category.name === name)
+  async findByName (name: string): Promise<Categories | null> {
+    const categoryByName = await prisma.categories.findUnique({
+      where: {
+        name
+      }
+    })
     return categoryByName
   }
 
-  list () {
-    return this.categories
+  async list (): Promise<Categories[]> {
+    const allCategories = await prisma.categories.findMany()
+    return allCategories
   }
 }
 

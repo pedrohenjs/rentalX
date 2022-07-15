@@ -1,4 +1,4 @@
-import { Specification } from '../../models/specification'
+import { Specifications } from '@prisma/client'
 
 interface IRequest {
     name: string
@@ -6,6 +6,6 @@ interface IRequest {
 }
 interface ISpecificationRepository {
     create({ name, description }: IRequest): void
-    list(): Specification[]
+    list(): Promise<Specifications[]>
 }
 export { ISpecificationRepository }

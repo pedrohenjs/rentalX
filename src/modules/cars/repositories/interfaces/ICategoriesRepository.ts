@@ -1,12 +1,12 @@
-import { Category } from '../../models/category'
+import { Categories } from '@prisma/client'
 interface ICreateCategoryDTO {
     name: string
     description: string
 }
 
 interface ICategoriesRepsitory {
-    findByName(name: string): Category | undefined
-    list(): Category[]
+    findByName(name: string): Promise<Categories | null>
+    list(): Promise<Categories[]>
     create({ name, description }: ICreateCategoryDTO): void
 }
 

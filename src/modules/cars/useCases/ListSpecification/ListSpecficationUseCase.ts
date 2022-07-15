@@ -1,4 +1,4 @@
-import { Specification } from '../../models/specification'
+import { Specifications } from '@prisma/client'
 import { SpecificationRepository } from '../../repositories/implementations/SpecificationRepository'
 
 class ListSpecificationUseCase {
@@ -7,8 +7,9 @@ class ListSpecificationUseCase {
     this.repository = repository
   }
 
-  execute (): Specification[] {
-    return this.repository.list()
+  async execute (): Promise<Specifications[]> {
+    const allSpecifications = await this.repository.list()
+    return allSpecifications
   }
 }
 export { ListSpecificationUseCase }

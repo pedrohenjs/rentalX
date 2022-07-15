@@ -7,8 +7,8 @@ class ListSpecificationController {
     this.useCase = useCase
   }
 
-  handle (request: Request, response: Response) {
-    const allSpecifications = this.useCase.execute()
+  async handle (request: Request, response: Response) {
+    const allSpecifications = await this.useCase.execute()
     return response.status(200).json(allSpecifications)
   }
 }

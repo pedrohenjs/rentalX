@@ -1,41 +1,34 @@
-import { Specification } from '../../models/specification'
+
 import { ISpecificationRepository } from '../../repositories/interfaces/ISpecificationRepository'
+import { prisma } from '../../../../database/prismaClient'
+import { Specifications } from '@prisma/client'
 interface IRequest {
     name: string
     description: string
 }
 
 class SpecificationRepository implements ISpecificationRepository {
-  private specifications: Specification[]
-  // eslint-disable-next-line no-use-before-define
-  private static INSTANCE: SpecificationRepository
-  constructor () {
-    this.specifications = []
-  }
-
-  create ({ name, description }: IRequest): void {
-    const specification = new Specification()
-    Object.assign(specification, {
-      name,
-      description,
-      created_at: new Date()
+  async create ({ name, description }: IRequest): Promise<void> {
+    await prisma.specifications.create({
+      data: {
+        name,
+        description
+      }
     })
-    this.specifications.push(specification)
   }
 
-  static getInstance () {
-    if (!SpecificationRepository.INSTANCE) {
-      SpecificationRepository.INSTANCE = new SpecificationRepository()
-    }
-    return SpecificationRepository.INSTANCE
+  async findByName (name: string): Promise<Specifications | null> {
+    const specification = await prisma.specifications.findUnique({
+      where: {
+        name
+      }
+    })
+    return specification
   }
 
-  findByName (name: string) {
-    return this.specifications.find(elemente => elemente.name === name)
-  }
-
-  list () {
-    return this.specifications
+  async list (): Promise<Specifications[]> {
+    const allSpecifications = await prisma.specifications.findMany()
+    return allSpecifications
   }
 }
 export { SpecificationRepository }

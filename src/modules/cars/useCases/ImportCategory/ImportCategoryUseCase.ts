@@ -2,6 +2,7 @@
 import fs from 'fs'
 import { parse } from 'csv-parse'
 import { ICategoriesRepsitory } from '../../repositories/interfaces/ICategoriesRepository'
+import { prisma } from '../../../../database/prismaClient'
 
 interface IImportCategory {
   name: string
@@ -42,16 +43,19 @@ class ImportCategoryUseCase {
   execute (file: Express.Multer.File | undefined): void {
     this.loadCategories(file).then(importedCategories => {
       console.log(importedCategories)
-      importedCategories.map((category) => {
+      importedCategories.map(async (category) => {
         const { name, description } = category
-
-        const existCategory = this.categoryRepository.findByName(name)
+        const existCategory = await this.categoryRepository.findByName(name)
 
         if (!existCategory) {
-          this.categoryRepository.create({ name, description })
-          return null
+          await prisma.categories.create({
+            data: {
+              name,
+              description
+            }
+          })
         }
-        return null
+        return undefined
       })
     }).catch(e => console.log(e))
   }

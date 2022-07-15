@@ -1,3 +1,4 @@
+
 import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository'
 
 interface IRequest{
@@ -11,14 +12,14 @@ class CreateCategoryUseCase {
     this.repository = repository
   }
 
-  execute ({ name, description }: IRequest) {
-    const categoryAlreadyExists = this.repository.findByName(name)
+  async execute ({ name, description }: IRequest) {
+    const categotyExists = await this.repository.findByName(name)
 
-    if (categoryAlreadyExists) {
-      throw new Error('Category already exists!')
+    if (categotyExists) {
+      throw Error('Category already exists!')
     }
 
-    this.repository.create({ name, description })
+    await this.repository.create({ name, description })
   }
 }
 export { CreateCategoryUseCase }

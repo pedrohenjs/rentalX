@@ -1,4 +1,4 @@
-import { Category } from '../../models/category'
+
 import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository'
 
 class ListCategoryUseCase {
@@ -7,8 +7,9 @@ class ListCategoryUseCase {
     this.categoriesRepository = categoriesRepository
   }
 
-  execute (): Category[] {
-    return this.categoriesRepository.list()
+  async execute () {
+    const allCategories = await this.categoriesRepository.list()
+    return allCategories
   }
 }
 export { ListCategoryUseCase }
