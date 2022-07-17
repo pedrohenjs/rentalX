@@ -5,6 +5,7 @@ interface IRequest {
     description: string
 }
 interface ISpecificationRepository {
+    findByName(name: string): Promise<Specifications | null>
     create({ name, description }: IRequest): void
     list(): Promise<Specifications[]>
 }

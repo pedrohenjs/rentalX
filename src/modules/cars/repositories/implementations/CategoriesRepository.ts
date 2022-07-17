@@ -1,5 +1,6 @@
 
 import { Categories, PrismaClient } from '@prisma/client'
+import { ICategoriesRepsitory } from '../interfaces/ICategoriesRepository'
 const prisma = new PrismaClient()
 
 interface ICreateCategoryDTO {
@@ -7,7 +8,7 @@ interface ICreateCategoryDTO {
     description: string
 }
 
-class CategoriesRepository {
+class CategoriesRepository implements ICategoriesRepsitory {
   // eslint-disable-next-line no-use-before-define
 
   async create ({ name, description }: ICreateCategoryDTO) {
