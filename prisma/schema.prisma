@@ -23,3 +23,14 @@ model Specifications {
   description String
   created_at  DateTime @default(now())
 }
+
+model Users {
+  id             String   @id @default(uuid())
+  name           String
+  username       String   @unique
+  password       String
+  email          String   @unique
+  driver_license String
+  admin          Boolean @default(false)
+  created_at     DateTime @default(now())
+}
