@@ -1,4 +1,4 @@
-import { ICreateUsersDTO, IUsersRepository } from '../repositories/interfaces/IUsersRepository'
+import { ICreateUsersDTO, IUsersRepository } from '../../repositories/interfaces/IUsersRepository'
 import { hash } from 'bcrypt'
 
 export class CreateUsersUseCase {
