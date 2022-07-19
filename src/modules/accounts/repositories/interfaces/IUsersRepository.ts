@@ -10,5 +10,5 @@ export interface ICreateUsersDTO {
 
 export interface IUsersRepository {
     create(data: ICreateUsersDTO): Promise<void>
-    list(): Promise<Users[]>
+    findByEmail(email: string): Promise<Users | null>
 }
