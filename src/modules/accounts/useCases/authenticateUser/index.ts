@@ -1,6 +1,6 @@
 import { UsersRepository } from '../../repositories/implementations/UsersRepository'
-import { AuthenticateUserUseCase } from './AuthenticateUserController'
-import { AuthenticateUserController } from './AuthenticateUserUseCase'
+import { AuthenticateUserUseCase } from '././AuthenticateUserUseCase'
+import { AuthenticateUserController } from './AuthenticateUserController'
 
 const repository = new UsersRepository()
 const authenticateUserUseCase = new AuthenticateUserUseCase(repository)

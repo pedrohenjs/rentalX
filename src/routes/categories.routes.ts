@@ -4,12 +4,13 @@ import { createCategoryController } from '../modules/cars/useCases/CreateCategor
 import { listCategoryController } from '../modules/cars/useCases/ListCategory'
 import multer from 'multer'
 import { importCategoryController } from '../modules/cars/useCases/ImportCategory'
+import { ensureAuthenticated } from '../modules/middlewares/ensureAuthenticated'
 
 const categoriesRouter = Router()
 const upload = multer({
   dest: './tmp'
 })
-
+categoriesRouter.use(ensureAuthenticated)
 categoriesRouter.post('/', (request, response) => {
   return createCategoryController.handle(request, response)
 })
