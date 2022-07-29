@@ -17,6 +17,7 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "camelcase":"off"
+        "camelcase":"off",
+        "no-undef": "off"
     }
 }

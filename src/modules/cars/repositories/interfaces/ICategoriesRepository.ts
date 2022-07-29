@@ -7,7 +7,7 @@ interface ICreateCategoryDTO {
 interface ICategoriesRepsitory {
     findByName(name: string): Promise<Categories | null>
     list(): Promise<Categories[]>
-    create({ name, description }: ICreateCategoryDTO): void
+    create({ name, description }: ICreateCategoryDTO): Promise<Categories>
 }
 
 export { ICategoriesRepsitory, ICreateCategoryDTO }
