@@ -1,9 +1,7 @@
-
-import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository'
+import { ICategoriesRepsitory } from '../../repositories/interfaces/ICategoriesRepository'
 
 class ListCategoryUseCase {
-  private categoriesRepository: CategoriesRepository
-  constructor (categoriesRepository: CategoriesRepository) {
+  constructor (private categoriesRepository: ICategoriesRepsitory) {
     this.categoriesRepository = categoriesRepository
   }
 

@@ -1,5 +1,4 @@
 
-import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository'
 import { ICategoriesRepsitory } from '../../repositories/interfaces/ICategoriesRepository'
 
 interface IRequest{
@@ -8,8 +7,7 @@ interface IRequest{
 }
 
 class CreateCategoryUseCase {
-  private repository: CategoriesRepository
-  constructor (repository: ICategoriesRepsitory) {
+  constructor (private repository: ICategoriesRepsitory) {
     this.repository = repository
   }
 

@@ -1,9 +1,8 @@
 import { Specifications } from '@prisma/client'
-import { SpecificationRepository } from '../../repositories/implementations/SpecificationRepository'
+import { ISpecificationRepository } from '../../repositories/interfaces/ISpecificationRepository'
 
 class ListSpecificationUseCase {
-  private repository: SpecificationRepository
-  constructor (repository: SpecificationRepository) {
+  constructor (private repository: ISpecificationRepository) {
     this.repository = repository
   }
 

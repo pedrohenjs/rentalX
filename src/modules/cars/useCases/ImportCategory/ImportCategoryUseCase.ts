@@ -10,8 +10,7 @@ interface IImportCategory {
 }
 
 class ImportCategoryUseCase {
-  private categoryRepository
-  constructor (categoryRepository: ICategoriesRepsitory) {
+  constructor (private categoryRepository: ICategoriesRepsitory) {
     this.categoryRepository = categoryRepository
   }
 
