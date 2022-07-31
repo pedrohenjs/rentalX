@@ -19,7 +19,7 @@ class CategoriesrepositoryInMemory implements ICategoriesRepsitory {
   }
 
   async create ({ name, description }: ICreateCategoryDTO): Promise<Categories> {
-    const category: Categories = {
+    const category = {
       name,
       id: uuidv4(),
       description,
